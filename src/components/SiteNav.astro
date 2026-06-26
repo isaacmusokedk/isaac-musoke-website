@@ -1,0 +1,305 @@
+---
+const currentPath = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/work', label: 'ARBEJDE' },
+  { href: '/about', label: 'OM' },
+  { href: '/contact', label: 'KONTAKT' },
+];
+---
+
+<header class="site-nav" id="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="ordmark nav-ordmark" aria-label="Isaac Musoke — gå til forsiden">
+      ISAAC MUSOKE
+    </a>
+
+    <!-- Desktop links -->
+    <nav class="nav-links" aria-label="Primær navigation">
+      <ul role="list">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class={`nav-link ${currentPath.startsWith(link.href) ? 'nav-link--active' : ''}`}
+              aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Hamburger button (mobile) -->
+    <button
+      class="hamburger"
+      id="hamburger-btn"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      aria-label="Åbn menu"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <!-- Mobile overlay -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Mobilnavigation">
+    <nav aria-label="Mobilnavigation">
+      <ul role="list">
+        {navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class={`mobile-link ${currentPath.startsWith(link.href) ? 'mobile-link--active' : ''}`}
+              aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--nav-height);
+    transition: background-color var(--duration-base) var(--ease-out),
+                border-bottom-color var(--duration-base) var(--ease-out);
+    background-color: transparent;
+    border-bottom: 1px solid transparent;
+  }
+
+  .site-nav.scrolled {
+    background-color: var(--color-bg);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: var(--max-width);
+    margin-inline: auto;
+    padding-inline: var(--space-xl);
+  }
+
+  .nav-ordmark {
+    font-size: 16px;
+    color: var(--color-text-primary);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .nav-ordmark:hover {
+    color: var(--color-accent-1);
+  }
+
+  /* Desktop nav */
+  .nav-links ul {
+    display: flex;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+
+  .nav-link {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast) var(--ease-out);
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
+    transition: color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out);
+  }
+
+  .nav-link:hover {
+    color: var(--color-text-primary);
+  }
+
+  .nav-link--active {
+    color: var(--color-text-primary);
+    border-bottom-color: var(--color-accent-1);
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: var(--space-sm);
+  }
+
+  .hamburger-line {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-text-primary);
+    border-radius: 2px;
+    transition: transform var(--duration-base) var(--ease-out),
+                opacity var(--duration-base) var(--ease-out);
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger[aria-expanded="true"] .hamburger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Mobile menu overlay */
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    background-color: var(--color-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-slow) var(--ease-out);
+    z-index: 99;
+  }
+
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2xl);
+  }
+
+  .mobile-link {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(28px, 7vw, 48px);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .mobile-link:hover,
+  .mobile-link--active {
+    color: var(--color-accent-1);
+  }
+
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .nav-inner {
+      padding-inline: var(--space-md);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-nav,
+    .mobile-menu,
+    .hamburger-line,
+    .nav-link,
+    .nav-ordmark {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Scroll-based background
+  const nav = document.getElementById('site-nav');
+  if (nav) {
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // Hamburger / mobile menu
+  const btn = document.getElementById('hamburger-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  if (btn && menu) {
+    const openMenu = () => {
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Luk menu');
+      menu.classList.add('open');
+      menu.removeAttribute('aria-hidden');
+      document.body.style.overflow = 'hidden';
+      // Move focus into menu
+      const firstLink = menu.querySelector('a') as HTMLElement | null;
+      firstLink?.focus();
+    };
+
+    const closeMenu = () => {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Åbn menu');
+      menu.classList.remove('open');
+      menu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      btn.focus();
+    };
+
+    btn.addEventListener('click', () => {
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      isOpen ? closeMenu() : openMenu();
+    });
+
+    // Keyboard: Escape closes, Tab traps focus inside open menu
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+      }
+
+      if (e.key === 'Tab' && menu && !menu.hasAttribute('aria-hidden')) {
+        const focusable = Array.from(menu.querySelectorAll<HTMLElement>('a, button')).filter(
+          (el) => !el.hasAttribute('disabled') && el.offsetParent !== null
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    // Close when a mobile link is clicked
+    menu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+  }
+</script>

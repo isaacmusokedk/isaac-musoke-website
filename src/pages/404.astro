@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 — Siden findes ikke · Isaac Musoke"
+  description="Siden du leder efter eksisterer ikke."
+>
+  <section class="not-found" aria-labelledby="notfound-heading">
+    <div class="container">
+      <p class="error-code type-display" aria-hidden="true">404</p>
+      <h1 class="type-h2" id="notfound-heading">Siden findes ikke</h1>
+      <p class="type-body not-found-body">
+        Det billede er ude af fokus. Det du leder efter er ikke her — eller er det aldrig blevet optaget.
+      </p>
+      <a href="/work" class="back-link type-label">
+        <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+          <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"/>
+        </svg>
+        Gå til arbejde
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .not-found .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .error-code {
+    font-size: clamp(80px, 20vw, 200px);
+    color: var(--color-text-muted);
+    line-height: 1;
+    letter-spacing: 0.05em;
+    user-select: none;
+  }
+
+  .not-found h1 {
+    color: var(--color-text-primary);
+  }
+
+  .not-found-body {
+    color: var(--color-text-secondary);
+    max-width: 400px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+    color: var(--color-accent-1);
+    padding: var(--space-sm) var(--space-xl);
+    border: 1px solid rgba(0, 153, 255, 0.35);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--duration-base) var(--ease-out),
+                color var(--duration-base) var(--ease-out);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    background-color: var(--color-accent-1);
+    color: var(--color-bg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .back-link {
+      transition: none;
+    }
+  }
+</style>

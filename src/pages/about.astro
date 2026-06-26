@@ -1,0 +1,225 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Om Isaac Musoke — Filmskaber · DOP · Skuespiller"
+  description="Isaac Musoke er dansk-ugandisk filmskaber, DOP og skuespiller. Han ser det, der glemmes, og fortæller det, der gælder."
+>
+  <article class="about-page" aria-labelledby="about-heading">
+    <div class="container">
+
+      <!-- Page layout: portrait + text -->
+      <div class="about-grid">
+
+        <!-- Portrait -->
+        <aside class="portrait-col" aria-label="Portræt af Isaac Musoke">
+          <div class="portrait-placeholder" aria-label="Portræt — erstattes af foto">
+            <span class="type-label portrait-label">PORTRÆT</span>
+          </div>
+          <!-- Credits -->
+          <ul class="credits" role="list" aria-label="Faglige referencer">
+            <li class="credit-item">
+              <span class="type-label credit-tag">DFI-registreret</span>
+            </li>
+            <li class="credit-item">
+              <span class="type-label credit-tag">DOP</span>
+            </li>
+            <li class="credit-item">
+              <span class="type-label credit-tag">Skuespiller</span>
+            </li>
+            <li class="credit-item">
+              <span class="type-label credit-tag">Instruktør</span>
+            </li>
+          </ul>
+        </aside>
+
+        <!-- Text content -->
+        <div class="about-content">
+          <h1 class="type-h1" id="about-heading">OM ISAAC MUSOKE</h1>
+
+          <div class="bio prose">
+            <p>
+              Isaac Musoke er dansk-ugandisk filmskaber, director of photography og skuespiller baseret i Danmark. Han er uddannet fra Den Danske Filmskole og registreret hos Det Danske Filminstitut (DFI).
+            </p>
+            <p>
+              Hans arbejde befinder sig i grænselandet mellem dokumentar og fiktion — et sted, hvor det personlige og det politiske mødes i billedet. Han har instrueret og fotograferet film for organisationer som Save the Children, Gyldendal og en lang række uafhængige kunstnere.
+            </p>
+            <p>
+              Isaac voksede op med to kulturer og to sprog, og det dobbelte blik er ikke bare biografi — det er metode. Han finder det, der overses. Han fortæller det, der holder. Hans kamera er tålmodigt. Hans fortælling er præcis.
+            </p>
+            <p>
+              Som skuespiller har han medvirket i kortfilm, teaterstykker og reklamekampagner i både Danmark og Uganda. Han bringer den samme intentionalitet til skærmbilledet uanset hvilken side af kameraet han befinder sig på.
+            </p>
+          </div>
+
+          <!-- Pull quote -->
+          <blockquote class="pull-quote" aria-label="Isaacs tilgang">
+            <p class="type-h2 pull-quote-text">
+              "Jeg ser det, der glemmes.<br />
+              Jeg fortæller det, der gælder."
+            </p>
+            <footer class="pull-quote-attr">
+              <cite class="type-label">— Isaac Musoke</cite>
+            </footer>
+          </blockquote>
+
+          <!-- Contact CTA -->
+          <div class="about-cta">
+            <a href="/contact" class="cta-link type-label">
+              Kom i kontakt
+              <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .about-page {
+    padding-top: calc(var(--nav-height) + var(--space-3xl));
+    padding-bottom: var(--space-4xl);
+    min-height: 100dvh;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: var(--space-4xl);
+    align-items: start;
+  }
+
+  /* Portrait */
+  .portrait-col {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-xl));
+  }
+
+  .portrait-placeholder {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background-color: var(--color-surface-2);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: var(--space-xl);
+  }
+
+  .portrait-label {
+    color: var(--color-text-muted);
+  }
+
+  .credits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .credit-tag {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-muted);
+  }
+
+  /* Text content */
+  .about-content {
+    padding-top: var(--space-sm);
+  }
+
+  .about-content h1 {
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-2xl);
+  }
+
+  /* Bio prose */
+  .bio {
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    margin-bottom: var(--space-3xl);
+  }
+
+  .bio p {
+    margin-bottom: var(--space-lg);
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    border-left: 3px solid var(--color-accent-2);
+    padding-left: var(--space-xl);
+    margin: var(--space-3xl) 0;
+  }
+
+  .pull-quote-text {
+    color: var(--color-text-primary);
+    font-style: normal;
+    line-height: 1.3;
+  }
+
+  .pull-quote-attr {
+    margin-top: var(--space-md);
+  }
+
+  .pull-quote-attr cite {
+    color: var(--color-text-muted);
+    font-style: normal;
+  }
+
+  /* CTA */
+  .about-cta {
+    margin-top: var(--space-2xl);
+  }
+
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--color-accent-1);
+    padding: var(--space-sm) var(--space-xl);
+    border: 1px solid rgba(0, 153, 255, 0.4);
+    border-radius: var(--radius-sm);
+    transition: background-color var(--duration-base) var(--ease-out),
+                color var(--duration-base) var(--ease-out),
+                border-color var(--duration-base) var(--ease-out);
+  }
+
+  .cta-link:hover {
+    background-color: var(--color-accent-1);
+    color: var(--color-bg);
+    border-color: var(--color-accent-1);
+  }
+
+  @media (max-width: 1024px) {
+    .about-grid {
+      grid-template-columns: 280px 1fr;
+      gap: var(--space-3xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .portrait-col {
+      position: static;
+    }
+
+    .portrait-placeholder {
+      max-height: 480px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta-link {
+      transition: none;
+    }
+  }
+</style>

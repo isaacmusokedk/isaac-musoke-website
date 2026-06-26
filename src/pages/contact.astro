@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Kontakt — Isaac Musoke"
+  description="Kom i kontakt med Isaac Musoke. Samarbejdsforespørgsler, bookinger og spørgsmål sendes til info@isaacmusoke.dk."
+>
+  <section class="contact-page" aria-labelledby="contact-heading">
+    <div class="container">
+      <h1 class="type-h1" id="contact-heading">KOM I KONTAKT</h1>
+
+      <p class="contact-intro type-body">
+        Har du et projekt, en idé eller blot lyst til at tale billeder?<br />
+        Skriv en mail — Isaac vender tilbage inden for 48 timer.
+      </p>
+
+      <a
+        href="mailto:info@isaacmusoke.dk"
+        class="mailto-btn"
+        aria-label="Send email til Isaac Musoke: info@isaacmusoke.dk"
+      >
+        <svg width="24" height="24" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+          <path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/>
+        </svg>
+        info@isaacmusoke.dk
+      </a>
+
+      <!-- Social links -->
+      <div class="contact-social">
+        <p class="type-label social-heading">Find Isaac på</p>
+        <ul class="social-list" role="list">
+          <li>
+            <a
+              href="https://www.instagram.com/isaacmusokedk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="Isaac Musoke på Instagram (åbner i nyt vindue)"
+            >
+              <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+                <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"/>
+              </svg>
+              <span>@isaacmusokedk</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/isaac-musoke/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="Isaac Musoke på LinkedIn (åbner i nyt vindue)"
+            >
+              <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+                <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/>
+              </svg>
+              <span>/in/isaac-musoke</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://vimeo.com/marchmedia"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="Isaac Musoke på Vimeo (åbner i nyt vindue)"
+            >
+              <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">
+                <path d="M234.24,74.18C226.27,110.27,183.67,160.43,156.5,182.7c-27.73,22.79-53.08,22.18-65.71-9.15L76.09,111.76C70,86.54,59.78,72,44,72a8,8,0,0,1,0-16c28.48,0,44.46,21.42,54.23,58.76L113,176.22c7.56,18.69,18.88,18.69,31.35,8.66,22.25-18.29,60.3-62.86,67.59-94.35,3.08-13.5,1.54-24-4.58-30.76-10-10.87-29.7-12.76-56-5.6a8,8,0,1,1-4.3-15.42C179.05,30.34,204.77,31.78,220,48.52,230.56,60.21,234.18,74.18,234.24,74.18Z"/>
+              </svg>
+              <span>vimeo.com/marchmedia</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    padding-top: calc(var(--nav-height) + var(--space-4xl));
+    padding-bottom: var(--space-4xl);
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+  }
+
+  .contact-page .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2xl);
+    width: 100%;
+  }
+
+  h1 {
+    color: var(--color-text-primary);
+  }
+
+  .contact-intro {
+    color: var(--color-text-secondary);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  /* Mailto button */
+  .mailto-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(20px, 3.5vw, 32px);
+    letter-spacing: 0.02em;
+    color: var(--color-accent-1);
+    padding: var(--space-lg) var(--space-2xl);
+    border: 1px solid rgba(0, 153, 255, 0.35);
+    border-radius: var(--radius-md);
+    background-color: transparent;
+    transition: background-color var(--duration-base) var(--ease-out),
+                color var(--duration-base) var(--ease-out),
+                border-color var(--duration-base) var(--ease-out),
+                transform var(--duration-base) var(--ease-out);
+    text-decoration: none;
+  }
+
+  .mailto-btn:hover {
+    background-color: var(--color-accent-1);
+    color: var(--color-bg);
+    border-color: var(--color-accent-1);
+    transform: translateY(-2px);
+  }
+
+  /* Social section */
+  .contact-social {
+    margin-top: var(--space-lg);
+  }
+
+  .social-heading {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .social-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-md);
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 16px;
+    transition: color var(--duration-fast) var(--ease-out);
+    text-decoration: none;
+  }
+
+  .social-link:hover {
+    color: var(--color-text-primary);
+  }
+
+  @media (max-width: 640px) {
+    .contact-page {
+      align-items: flex-start;
+      padding-top: calc(var(--nav-height) + var(--space-3xl));
+    }
+
+    .mailto-btn {
+      font-size: clamp(16px, 4vw, 22px);
+      padding: var(--space-md) var(--space-xl);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .mailto-btn {
+      padding: var(--space-sm) var(--space-md);
+      font-size: 15px;
+      word-break: break-all;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mailto-btn,
+    .social-link {
+      transition: none;
+    }
+
+    .mailto-btn:hover {
+      transform: none;
+    }
+  }
+</style>

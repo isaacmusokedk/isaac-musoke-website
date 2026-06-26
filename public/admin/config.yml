@@ -1,0 +1,32 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Enable Netlify Identity
+local_backend: false
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  - name: projects
+    label: Projekter
+    label_singular: Projekt
+    folder: src/content/projects
+    create: true
+    slug: "{{slug}}"
+    preview_path: "work/{{slug}}"
+    fields:
+      - { label: Titel, name: title, widget: string }
+      - { label: Slug (URL), name: slug, widget: string, hint: "Bruges i sidens URL. Kun små bogstaver og bindestreger, fx: mit-projekt" }
+      - { label: År, name: year, widget: number, value_type: int, min: 2000, max: 2099 }
+      - { label: Kategori, name: category, widget: select, options: [Musik, Poesi, Filmbusiness] }
+      - { label: Rolle, name: role, widget: string, hint: "Fx: Instruktør & DOP" }
+      - { label: Klient, name: client, widget: string }
+      - { label: Poster (forsidebillede), name: poster, widget: image }
+      - { label: Vimeo embed URL, name: embed_url, widget: string, required: false, hint: "Fx: https://player.vimeo.com/video/123456789" }
+      - { label: Preview clip URL (lydløs), name: clip_url, widget: string, required: false, hint: "Kort lydløs videoclip der afspilles ved hover på kortet" }
+      - { label: Stills (galleribilleder), name: stills, widget: list, required: false, field: { label: Billede, name: item, widget: image } }
+      - { label: Udvalgt på forsiden, name: featured, widget: boolean, default: false }
+      - { label: Uddrag (1-2 sætninger), name: excerpt, widget: text }
+      - { label: Beskrivelse (markdown), name: body, widget: markdown }

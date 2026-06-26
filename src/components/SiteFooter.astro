@@ -1,0 +1,113 @@
+---
+// SiteFooter — minimal, dark, with icon social links
+// Icons: Phosphor icons via CDN (inline SVG paths — no runtime dependency)
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner container">
+    <p class="footer-copy">
+      <span aria-hidden="true">&copy;</span>
+      <span class="sr-only">Copyright</span>
+      2026 Isaac Musoke
+    </p>
+
+    <nav class="footer-social" aria-label="Sociale medier">
+      <ul role="list">
+        <li>
+          <a
+            href="https://www.instagram.com/isaacmusokedk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Isaac Musoke på Instagram (åbner i nyt vindue)"
+            class="social-link"
+          >
+            <!-- Instagram icon (Phosphor Logo style) -->
+            <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"/>
+            </svg>
+            <span class="sr-only">Instagram</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/isaac-musoke/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Isaac Musoke på LinkedIn (åbner i nyt vindue)"
+            class="social-link"
+          >
+            <!-- LinkedIn icon (Phosphor Logo style) -->
+            <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"/>
+            </svg>
+            <span class="sr-only">LinkedIn</span>
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://vimeo.com/marchmedia"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Isaac Musoke på Vimeo (åbner i nyt vindue)"
+            class="social-link"
+          >
+            <!-- Vimeo icon (Phosphor Logo style) -->
+            <svg width="20" height="20" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d="M234.24,74.18C226.27,110.27,183.67,160.43,156.5,182.7c-27.73,22.79-53.08,22.18-65.71-9.15L76.09,111.76C70,86.54,59.78,72,44,72a8,8,0,0,1,0-16c28.48,0,44.46,21.42,54.23,58.76L113,176.22c7.56,18.69,18.88,18.69,31.35,8.66,22.25-18.29,60.3-62.86,67.59-94.35,3.08-13.5,1.54-24-4.58-30.76-10-10.87-29.7-12.76-56-5.6a8,8,0,1,1-4.3-15.42C179.05,30.34,204.77,31.78,220,48.52,230.56,60.21,234.18,74.18,234.24,74.18Z"/>
+            </svg>
+            <span class="sr-only">Vimeo</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-block: var(--space-xl);
+    margin-top: var(--space-4xl);
+  }
+
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .footer-copy {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-muted);
+  }
+
+  .footer-social ul {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .social-link:hover {
+    color: var(--color-text-primary);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .social-link {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,227 @@
+---
+interface Props {
+  title: string;
+  slug: string;
+  year: number;
+  category: 'Musik' | 'Poesi' | 'Filmbusiness';
+  poster: string;
+  excerpt: string;
+  clip_url?: string;
+  featured?: boolean;
+}
+
+const { title, slug, year, category, poster, excerpt, clip_url, featured } = Astro.props;
+
+const categoryColors: Record<string, string> = {
+  Musik: 'var(--color-accent-2)',
+  Poesi: 'var(--color-accent-3)',
+  Filmbusiness: 'var(--color-accent-1)',
+};
+
+const accentColor = categoryColors[category] ?? 'var(--color-accent-1)';
+---
+
+<article
+  class="project-card"
+  data-category={category}
+  data-clip={clip_url ?? ''}
+>
+  <a href={`/work/${slug}`} class="card-link" aria-label={`Se projekt: ${title} (${year})`}>
+    <div class="card-media">
+      <img
+        src={poster}
+        alt={`Poster for ${title}`}
+        width="800"
+        height="450"
+        loading="lazy"
+        decoding="async"
+        class="card-poster"
+      />
+      <!-- Video clip — swapped in on hover via JS -->
+      {clip_url && (
+        <video
+          class="card-clip"
+          src={clip_url}
+          autoplay
+          muted
+          loop
+          playsinline
+          aria-hidden="true"
+          tabindex="-1"
+        ></video>
+      )}
+      <div class="card-overlay" aria-hidden="true">
+        <span class="card-overlay-title type-h3">{title}</span>
+        <span class="card-overlay-category type-label" style={`color: ${accentColor};`}>{category}</span>
+      </div>
+    </div>
+
+    <div class="card-meta">
+      <div class="card-meta-left">
+        <span class="card-title type-h3">{title}</span>
+        <span class="card-year type-small">{year}</span>
+      </div>
+      <span
+        class="card-tag type-label"
+        style={`color: ${accentColor}; border-color: ${accentColor};`}
+      >
+        {category}
+      </span>
+    </div>
+  </a>
+</article>
+
+<style>
+  .project-card {
+    position: relative;
+  }
+
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .card-link:focus-visible {
+    outline: 2px solid var(--color-accent-1);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+  }
+
+  .card-media {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background-color: var(--color-surface-1);
+    aspect-ratio: 16 / 9;
+  }
+
+  .card-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--duration-slow) var(--ease-out),
+                opacity var(--duration-base) var(--ease-out);
+  }
+
+  .card-clip {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+
+  .card-clip.playing {
+    opacity: 1;
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(8, 8, 8, 0.92) 0%,
+      rgba(8, 8, 8, 0.5) 40%,
+      transparent 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: var(--space-lg);
+    opacity: 0;
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+
+  .card-overlay-title {
+    color: var(--color-text-primary);
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .card-overlay-category {
+    display: block;
+  }
+
+  .card-link:hover .card-overlay,
+  .card-link:focus-visible .card-overlay {
+    opacity: 1;
+  }
+
+  .card-link:hover .card-poster {
+    transform: scale(1.04);
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .card-meta-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .card-title {
+    color: var(--color-text-primary);
+    font-size: 18px;
+  }
+
+  .card-year {
+    color: var(--color-text-muted);
+  }
+
+  .card-tag {
+    flex-shrink: 0;
+    border: 1px solid;
+    border-radius: var(--radius-sm);
+    padding: var(--space-xs) var(--space-sm);
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-poster,
+    .card-clip,
+    .card-overlay {
+      transition: none;
+    }
+
+    .card-link:hover .card-poster {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // Autoplay-on-hover for project cards with clip_url
+  document.querySelectorAll<HTMLElement>('.project-card[data-clip]').forEach((card) => {
+    const clipSrc = card.dataset.clip;
+    if (!clipSrc) return;
+
+    const link = card.querySelector('.card-link');
+    const poster = card.querySelector<HTMLImageElement>('.card-poster');
+    const video = card.querySelector<HTMLVideoElement>('.card-clip');
+
+    if (!link || !poster || !video) return;
+
+    link.addEventListener('mouseenter', () => {
+      video.classList.add('playing');
+      video.play().catch(() => {
+        // Autoplay blocked — silently ignore, poster stays visible
+      });
+    });
+
+    link.addEventListener('mouseleave', () => {
+      video.classList.remove('playing');
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+</script>

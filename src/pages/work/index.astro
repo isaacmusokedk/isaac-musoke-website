@@ -1,0 +1,219 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => b.data.year - a.data.year);
+
+const categories = ['Musik', 'Poesi', 'Filmbusiness'] as const;
+---
+
+<BaseLayout
+  title="Arbejde — Isaac Musoke"
+  description="Se Isaac Musokes filmprojekter inden for Musik, Poesi og Filmbusiness."
+>
+  <section class="work-page" aria-labelledby="work-heading">
+    <div class="container">
+      <header class="work-header">
+        <h1 class="type-h1" id="work-heading">ARBEJDE</h1>
+        <p class="work-count type-small" aria-live="polite" id="project-count">
+          {projects.length} projekter
+        </p>
+      </header>
+
+      <!-- Filter pills -->
+      <div class="filter-bar" role="group" aria-label="Filtrer projekter efter kategori">
+        <button
+          class="filter-pill filter-pill--all active"
+          data-filter="all"
+          aria-pressed="true"
+        >
+          Alle
+        </button>
+        {categories.map((cat) => (
+          <button
+            class="filter-pill"
+            data-filter={cat}
+            aria-pressed="false"
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <!-- Project grid -->
+      <div class="project-grid" id="project-grid" aria-label="Projektgalleri" role="list">
+        {projects.map((project) => (
+          <div
+            class="grid-item"
+            data-category={project.data.category}
+            role="listitem"
+          >
+            <ProjectCard
+              title={project.data.title}
+              slug={project.data.slug}
+              year={project.data.year}
+              category={project.data.category}
+              poster={project.data.poster}
+              excerpt={project.data.excerpt}
+              clip_url={project.data.clip_url}
+              featured={project.data.featured}
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty state (shown by JS when no results) -->
+      <div class="empty-state" id="empty-state" hidden aria-live="polite">
+        <p class="type-body" style="color: var(--color-text-muted);">
+          Ingen projekter i denne kategori endnu.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .work-page {
+    padding-top: calc(var(--nav-height) + var(--space-3xl));
+    padding-bottom: var(--space-4xl);
+    min-height: 100dvh;
+  }
+
+  .work-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .work-header h1 {
+    color: var(--color-text-primary);
+  }
+
+  .work-count {
+    color: var(--color-text-muted);
+  }
+
+  /* Filter pills */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .filter-pill {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--color-text-secondary);
+    background-color: transparent;
+    transition: color var(--duration-fast) var(--ease-out),
+                border-color var(--duration-fast) var(--ease-out),
+                background-color var(--duration-fast) var(--ease-out);
+    cursor: pointer;
+  }
+
+  .filter-pill:hover {
+    color: var(--color-text-primary);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .filter-pill.active,
+  .filter-pill[aria-pressed="true"] {
+    color: var(--color-bg);
+    background-color: var(--color-accent-1);
+    border-color: var(--color-accent-1);
+  }
+
+  /* Project grid */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .grid-item {
+    transition: opacity var(--duration-base) var(--ease-out);
+  }
+
+  .grid-item[hidden] {
+    display: none;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: var(--space-4xl) 0;
+  }
+
+  @media (max-width: 1024px) {
+    .project-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .work-header {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .filter-pill,
+    .grid-item {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const pills = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+  const items = document.querySelectorAll<HTMLElement>('.grid-item');
+  const countEl = document.getElementById('project-count');
+  const emptyState = document.getElementById('empty-state');
+
+  function applyFilter(filter: string) {
+    let visible = 0;
+
+    items.forEach((item) => {
+      const cat = item.dataset.category ?? '';
+      const show = filter === 'all' || cat === filter;
+      item.hidden = !show;
+      if (show) visible++;
+    });
+
+    if (countEl) {
+      countEl.textContent = `${visible} ${visible === 1 ? 'projekt' : 'projekter'}`;
+    }
+
+    if (emptyState) {
+      emptyState.hidden = visible > 0;
+    }
+  }
+
+  pills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      // Update active state
+      pills.forEach((p) => {
+        p.classList.remove('active');
+        p.setAttribute('aria-pressed', 'false');
+      });
+      pill.classList.add('active');
+      pill.setAttribute('aria-pressed', 'true');
+
+      applyFilter(pill.dataset.filter ?? 'all');
+    });
+  });
+</script>
