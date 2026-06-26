@@ -4,7 +4,6 @@ const projectsCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    slug: z.string(),
     year: z.number(),
     category: z.enum(['Musik', 'Poesi', 'Filmbusiness']),
     role: z.string(),
