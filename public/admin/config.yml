@@ -1,8 +1,12 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: isaacmusokedk/isaac-musoke-website
   branch: main
+  # TODO (Isaac): Replace the base_url below with your actual Netlify site URL once deployed.
+  # Example: https://isaac-musoke.netlify.app
+  base_url: https://SITE_URL
+  auth_endpoint: api/auth
 
-# Enable Netlify Identity
 local_backend: false
 
 media_folder: public/images
