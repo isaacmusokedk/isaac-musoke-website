@@ -2,9 +2,7 @@ backend:
   name: github
   repo: isaacmusokedk/isaac-musoke-website
   branch: main
-  # TODO (Isaac): Replace the base_url below with your actual Netlify site URL once deployed.
-  # Example: https://isaac-musoke.netlify.app
-  base_url: https://SITE_URL
+  base_url: https://verdant-raindrop-6e9423.netlify.app
   auth_endpoint: api/auth
 
 local_backend: false
