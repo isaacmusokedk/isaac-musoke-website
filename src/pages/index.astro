@@ -71,7 +71,7 @@ const heroEmbedSrc = `https://player.vimeo.com/video/${heroVideoId}?autoplay=1&m
         {featuredProjects.map((project) => (
           <ProjectCard
             title={project.data.title}
-            slug={project.data.slug}
+            slug={project.slug}
             year={project.data.year}
             category={project.data.category}
             poster={project.data.poster}
