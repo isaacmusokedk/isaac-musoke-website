@@ -2,7 +2,7 @@ backend:
   name: github
   repo: isaacmusokedk/isaac-musoke-website
   branch: main
-  base_url: https://verdant-raindrop-6e9423.netlify.app
+  base_url: https://isaacmusoke.netlify.app
   auth_endpoint: api/auth
 
 local_backend: false
